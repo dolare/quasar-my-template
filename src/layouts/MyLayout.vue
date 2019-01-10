@@ -64,21 +64,7 @@
 
   <!-- REQUIRED -->
   <q-page-container>
-
-    <!--
-      Here it's where Vue Router injects children
-      Page components.
-
-      <router-view/> tag below can be replaced by an
-      actual page content should you wish to do so.
-    -->
     <router-view />
-    <!--
-      First child of QPageContainer must be a QPage,
-      so make sure that your layout route children components
-      encapsulate a QPage.
-    -->
-
   </q-page-container>
 
   <!-- optional -->
