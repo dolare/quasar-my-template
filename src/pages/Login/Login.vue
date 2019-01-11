@@ -13,7 +13,7 @@
         float-label="password"/>
         <q-btn label="Login" @click="handleLogin"
         color="primary"
-        rounded="true"/>
+        rounded/>
       </q-card-main>
     </q-card>
 </template>
@@ -38,8 +38,19 @@ export default {
   computed: {
   },
   methods: {
-    handleLogin () {
-      console.log('login')
+    async handleLogin () {
+      let loginForm = {
+        email: this.username,
+        password: this.password,
+        axios: this.$axios
+      }
+      try {
+        await this.$store.dispatch('user/loginByUsername', loginForm)
+        await this.$router.push({ name: 'app' })
+      } catch (err) {
+        console.log(err)
+      }
+      // await this.$store.dispatch('getBasicUserInfo')
     }
   }
 }

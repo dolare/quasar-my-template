@@ -3,7 +3,7 @@ import axios from 'axios'
 export default ({app, router, Vue, store}) => {
   // create axios instance
   const service = axios.create({
-    baseURL: '/',
+    baseURL: 'https://reqres.in',
     3: true,
     timeout: 15000
   })
@@ -13,7 +13,7 @@ export default ({app, router, Vue, store}) => {
     // Do something before request is sent
     if (config.noauth) {
       return config
-    } else if (store.state.user.token || config.url === '/sysapi/api/token') {
+    } else if (store.state.user.token || config.url === '/api/login') {
       config.headers['Authorization'] = `Bearer ${store.state.user.token}`
     }
     return config
@@ -27,6 +27,13 @@ export default ({app, router, Vue, store}) => {
       return response
     },
     error => {
+      console.log(error)
+      Vue.prototype.$q.notify({
+        color: 'negative',
+        position: 'bottom',
+        message: error.error,
+        icon: 'report_problem'
+      })
       return Promise.reject(error)
     }
   )

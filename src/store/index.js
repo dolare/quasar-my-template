@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
-import example from './module-example'
-
+import createPersistedState from 'vuex-persistedstate'
+import user from './user'
+console.log(user)
 Vue.use(Vuex)
 
 /*
@@ -13,9 +13,17 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      example
-    }
+      user
+    },
+    plugins: [
+      createPersistedState({
+        storage: window.localStorage,
+        key: 'app',
+        paths: [
+          'user.token'
+        ]
+      })
+    ]
   })
-
   return Store
 }
